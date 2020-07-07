@@ -131,7 +131,20 @@ class _LoginScreenState extends State<LoginScreen> {
               )
             else
               Center(
-                child: Text('YAY, I am login!'),
+                child: Column(
+                  children: <Widget>[
+                    Text('YAY, I am login!'),
+                    RaisedButton(
+                      elevation: 20.0,
+                      child: Text('Logout'),
+                      onPressed: () {
+                        setState(() {
+                          isLogin = false;
+                        });
+                      },
+                    )
+                  ],
+                ),
               )
           ],
         ),
