@@ -1,6 +1,6 @@
 # startwithflutter
 
-A new Flutter project.
+A new Flutter project to teach Dart and Flutter! 
 
 ## Getting Started
 
