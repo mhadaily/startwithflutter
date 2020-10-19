@@ -9,7 +9,7 @@ main() {
   list[1] = 2;
   print(list); // [2,2];
 
-  var list2 = List();
+  var list2 = [];
   list.add(1);
   list.add(1);
 // or Chain
