@@ -183,8 +183,23 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget>
                 ],
               ),
             )
-          : Center(
-              child: Text('Loading...'),
+          : Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.grey.shade900,
+                    Colors.black,
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  'Loading...',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
     );
   }
