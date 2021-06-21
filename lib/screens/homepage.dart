@@ -9,15 +9,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   double opacityLevel = 1.0;
-  WeatherInfo weatherInfo;
+  WeatherInfo? weatherInfo;
 
-  AnimationController controller;
-  Animation<double> animation;
-  Animation<Offset> weatherIconOffsetAnimation;
-  Animation<Offset> dateOffsetAnimation;
-  Animation<Offset> weatherDescOffsetAnimation;
-  Animation<Offset> locationOffsetAnimation;
-  Animation<Offset> temperatureOffsetAnimation;
+  late AnimationController controller;
+  late Animation<double> animation;
+  late Animation<Offset> weatherIconOffsetAnimation;
+  late Animation<Offset> dateOffsetAnimation;
+  late Animation<Offset> weatherDescOffsetAnimation;
+  late Animation<Offset> locationOffsetAnimation;
+  late Animation<Offset> temperatureOffsetAnimation;
 
   @override
   void initState() {
@@ -168,49 +168,51 @@ class _HomeScreenState extends State<HomeScreen>
     return Expanded(
       child: FadeTransition(
         opacity: animation,
-        child: ListView.builder(
-          itemCount: weatherInfo.days.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 30.0,
-              padding: EdgeInsets.only(
-                left: 20.0,
-                right: 20.0,
-              ),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 4,
-                    child: Text(
-                      weatherInfo.days[index].toString(),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w300,
-                      ),
+        child: weatherInfo != null
+            ? ListView.builder(
+                itemCount: weatherInfo?.days.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    height: 30.0,
+                    padding: EdgeInsets.only(
+                      left: 20.0,
+                      right: 20.0,
                     ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Icon(
-                      Icons.cloud_queue,
-                      color: Colors.white,
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 4,
+                          child: Text(
+                            weatherInfo?.days[index].toString() ?? '',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Icon(
+                            Icons.cloud_queue,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 4,
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              weatherInfo?.temps[index].toString() ?? '',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  Expanded(
-                    flex: 4,
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        weatherInfo.temps[index].toString(),
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
+                  );
+                },
+              )
+            : SizedBox(),
       ),
     );
   }
@@ -231,7 +233,7 @@ class _HomeScreenState extends State<HomeScreen>
         ),
         height: 100.0,
         child: ListView.builder(
-          itemCount: weatherInfo.times.length,
+          itemCount: weatherInfo?.times.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
             return Container(
@@ -244,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen>
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         Text(
-                          weatherInfo.times[index].toString(),
+                          weatherInfo?.times[index].toString() ?? '',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 14.0,
@@ -252,7 +254,7 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                         Icon(Icons.cloud_queue, color: Colors.white),
                         Text(
-                          weatherInfo.temps[index].toString(),
+                          weatherInfo?.temps[index].toString() ?? '',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 14.0,
@@ -396,4 +398,3 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 }
-

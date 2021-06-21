@@ -4,9 +4,9 @@ class WeatherInfo {
   final List<String> days;
 
   WeatherInfo({
-    this.times,
-    this.temps,
-    this.days,
+    required this.times,
+    required this.temps,
+    required this.days,
   });
 
   factory WeatherInfo.fromJson(Map<String, dynamic> json) {

@@ -1,11 +1,10 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-
 import '../models/weather.dart';
 
 Future<WeatherInfo> fetchWeatherInfo() async {
-  final http.Response res = await http.get('https://jsonkeeper.com/b/OOJE');
+  final Uri uri = Uri.https('jsonkeeper.com', '/b/OOJE');
+  final http.Response res = await http.get(uri);
   if (res.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
